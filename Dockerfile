@@ -1,6 +1,6 @@
 FROM openjdk:8
 
-ENV PACKAGE_NAME=invitation-2.1.0.jar
+ENV PACKAGE_NAME=invitation-2.1.1.jar
 
 RUN mkdir -p /home/docker/Software
 ADD target/$PACKAGE_NAME  /home/docker/Software/$PACKAGE_NAME 

@@ -27,15 +27,31 @@ public class MessageController {
     MessageService messageService;
     
 
-    @MessageMapping("/sendMessage")
-    @SendTo("/topic/messages")
+    // @MessageMapping("/sendMessage")
+    // @SendTo("/topic/messages")
+    // public ResponseEntity<HttpResponse> createMessage(HttpServletRequest request, @RequestBody Message message) {
+    //     HttpResponse response = new HttpResponse(request.getRequestURI());
+
+    //     try {
+    //         Message newMessage = messageService.createMessage(message);
+
+    //         response.setStatus(HttpStatus.OK);
+    //         response.setData(newMessage);
+    //     } catch (Exception e) {
+    //         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+    //         response.setMessage("Unexpected error creating message: " + e.getMessage());
+    //     }
+    //     return ResponseEntity.status(response.getStatus()).body(response);
+    // }
+
+    @PostMapping("/sendMessage")
     public ResponseEntity<HttpResponse> createMessage(HttpServletRequest request, @RequestBody Message message) {
         HttpResponse response = new HttpResponse(request.getRequestURI());
 
         try {
             messageService.createMessage(message);
 
-            List<Message> messageList = messageRepository.findAll(Sort.by(Sort.Direction.ASC, "created"));
+            List<Message> messageList = messageRepository.findAll(Sort.by(Sort.Direction.DESC, "created"));
             response.setStatus(HttpStatus.OK);
             response.setData(messageList);
         } catch (Exception e) {
@@ -50,7 +66,7 @@ public class MessageController {
         HttpResponse response = new HttpResponse(request.getRequestURI());
 
         try {
-            List<Message> messageList = messageRepository.findAll(Sort.by(Sort.Direction.ASC, "created"));
+            List<Message> messageList = messageRepository.findAll(Sort.by(Sort.Direction.DESC, "created"));
             response.setStatus(HttpStatus.OK);
             response.setData(messageList);
         } catch (Exception e) {

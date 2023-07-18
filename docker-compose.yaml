@@ -3,7 +3,7 @@ version: '3'
 services:
   invitation-be:
     container_name: invitation-be
-    image: naqiudd33n/invitation-be:0.2.2
+    image: naqiudd33n/invitation-be:0.2.3
     restart: always
     ports:
       - 8080:5000
